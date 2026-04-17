@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+    <h1 class="app-title">Expense &amp; Budget Visualizer</h1>
+
+    <!-- Card 1: Header -->
+    <div class="card header-card">
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">🌙</button>
+      <p class="balance-label">TOTAL BALANCE</p>
+      <h2 id="total-balance" class="balance-amount">$0.00</h2>
+      <span id="budget-warning" class="budget-warning hidden">⚠️ Over budget!</span>
+      <div class="limit-row">
+        <label for="monthly-limit">Monthly Limit ($)</label>
+        <input type="number" id="monthly-limit" placeholder="0.00" min="0" step="0.01" />
+      </div>
+    </div>
+
+    <!-- Card 2: Add Transaction Form -->
+    <div class="card form-card">
+      <h3 class="card-title">Add Transaction</h3>
+      <form id="transaction-form" novalidate>
+        <div class="field-group">
+          <label for="item-name">Item Name</label>
+          <input type="text" id="item-name" placeholder="e.g. Coffee" />
+          <span class="field-error" id="name-error"></span>
+        </div>
+        <div class="field-group">
+          <label for="item-amount">Amount</label>
+          <input type="number" id="item-amount" placeholder="0.00" min="0.01" step="0.01" />
+          <span class="field-error" id="amount-error"></span>
+        </div>
+        <div class="field-group">
+          <label for="item-category">Category</label>
+          <select id="item-category">
+            <option value="">Select a category</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Fun">Fun</option>
+            <option value="__new__">+ Add New Category</option>
+          </select>
+          <span class="field-error" id="category-error"></span>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Add Transaction</button>
+      </form>
+    </div>
+
+    <!-- Card 3: Bottom Row -->
+    <div class="bottom-row">
+      <div class="card list-card">
+        <h3 class="card-title">Transactions</h3>
+        <ul id="transaction-list" class="transaction-list"></ul>
+      </div>
+      <div class="card chart-card">
+        <h3 class="card-title">Spending by Category</h3>
+        <canvas id="spending-chart"></canvas>
+        <div id="chart-legend" class="chart-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div id="category-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <h4 class="modal-title">New Category</h4>
+      <div class="field-group">
+        <label for="new-cat-name">Category Name</label>
+        <input type="text" id="new-cat-name" placeholder="e.g. Health" />
+        <span class="field-error" id="new-cat-error"></span>
+      </div>
+      <div class="field-group">
+        <label for="new-cat-color">Color</label>
+        <input type="color" id="new-cat-color" value="#9C27B0" />
+      </div>
+      <div class="modal-actions">
+        <button id="modal-cancel" class="btn-secondary">Cancel</button>
+        <button id="modal-confirm" class="btn-primary">Add Category</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
